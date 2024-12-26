@@ -1,0 +1,40 @@
+create table customer ( 
+    cid int primary key, 
+    name varchar2(255) not null, 
+    email varchar2(255) unique not null, 
+    password varchar2(20) not null, 
+    phone number(20) unique not null, 
+    address varchar2(255) not null 
+);
+
+create table orderr ( 
+    oid int primary key, 
+    amount number not null, 
+    orderdate date not null, 
+    tmoney number not null, 
+    cid int references customer(cid) 
+);
+
+create table product ( 
+    pid int primary key, 
+    pname varchar2(255) not null, 
+    pdescription varchar2(255) not null, 
+    price number not null, 
+    nstock number not null, 
+    oid int references orderr(oid) 
+);
+
+create table payment ( 
+    payid int primary key, 
+    paymethod varchar2(30) not null, 
+    tmoney number not null, 
+    paydate date not null, 
+    oid int references orderr(oid) 
+);
+
+create table shipping( 
+    sid int primary key, 
+    saddress varchar2(255) not null, 
+    shipdate date not null, 
+    oid int references orderr(oid) 
+);
